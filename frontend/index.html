@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Autoservicio</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" type="image/jpg" href="./src/img/favicon.jpg">
+</head>
+<body>
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <img src="./src/img/favicon.jpg" alt="Logo" class="logo">
+        <h1> DATA DREAM</h1>
+        <!-- Carrito de compras -->
+        <div class="cart" onclick="toggleCart()">
+            🛒
+            <div class="cart-count">0</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Navegación lateral -->
+        <div class="sidebar">
+            <h3>CATEGORÍAS</h3>
+            <div class="nav-item active" onclick="filterProducts('all')">
+                <img src="./src/img/todos.jpg" alt="Todos los Productos" class="nav-img">
+                <span>TODOS LOS PRODUCTOS</span>
+            </div>
+            <div class="nav-item" onclick="filterProducts('clothes')">
+                <img src="./src/img/clothes.jpg" alt="Ropa" class="nav-img">
+                <span>ROPA</span>
+            </div>
+            <div class="nav-item" onclick="filterProducts('accesories')">
+                <img src="./src/img/accesories.jpg" alt="Accesorios" class="nav-img">
+                <span>ACCESORIOS</span>
+            </div>
+    
+            
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <!-- Grilla de productos -->
+            </div>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+</html>

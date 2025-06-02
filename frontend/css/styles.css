@@ -1,0 +1,152 @@
+:root {
+    --color-1: #f8f9fa;  /* Gris muy claro */
+    --color-2: #e9ecef;  /* Gris claro */
+    --color-3: #dee2e6;  /* Gris medio claro */
+    --color-4: #ced4da;  /* Gris medio */
+    --color-5: #adb5bd;  /* Gris */
+    --color-6: #6c757d;  /* Gris oscuro */
+    --color-7: #495057;  /* Gris muy oscuro */
+    --color-8: #343a40;  /* Negro grisáceo */
+    --color-9: #212529;  /* Negro */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, var(--color-2), var(--color-3));
+    min-height: 100vh;
+}
+
+/* Barra superior */
+.top-bar {
+    background: linear-gradient(90deg, var(--color-9), var(--color-8));
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.top-bar h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    letter-spacing: 1px;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+/* Carrito de compras */
+.cart {
+    position: absolute;
+    right: 2rem;
+    background: var(--color-4);
+    color: white;
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 50;
+}
+
+.cart:hover {
+    background: var(--color-5);
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--color-8);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+
+.logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+
+/* Container principal */
+.container {
+    display: flex;
+    min-height: calc(100vh - 70px);
+}
+
+/*BARRA LATERAL IZQUIERDA  */
+
+.sidebar {
+    width: 250px;
+    background-color: var(--color-9);
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    height: 100vh;
+}
+
+.sidebar h3 {
+    color: var(--color-1);
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.nav-item {
+    background: var(--color-7);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Imagen arriba, texto abajo */
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid transparent;
+}
+
+.nav-item:hover {
+    transform: scale(1.05); /* Efecto al pasar el mouse */
+    background: var(--color-6);
+    border-color: var(--color-4);
+    box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+}
+
+.nav-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.nav-item span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    
+}
+
+/*ACÁ TERMINA LO DE LA BARRA  LATERAL*/
+
+
