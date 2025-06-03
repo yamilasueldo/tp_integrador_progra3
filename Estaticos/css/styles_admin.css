@@ -634,7 +634,7 @@ form .input-group:last-of-type {
 
 /* Tarjetas de usuario */
 .user-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(233, 213, 213, 0.95);
     backdrop-filter: blur(15px);
     border-radius: 25px;
     padding: 3.5rem 2.5rem;

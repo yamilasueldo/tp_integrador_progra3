@@ -63,19 +63,17 @@ function createBackgroundEffect() {
     }
 }
 
-// Función para manejar el redimensionamiento de la ventana
+
 window.addEventListener('resize', function() {
-    // Aquí puedes agregar lógica adicional si es necesario
-    // Por ejemplo, reajustar animaciones o efectos
+
 });
 
-// Función utilitaria para navegación futura
 function navigateTo(path) {
     window.location.href = path;
 }
 
-// Manejo de errores global para esta página
+
 window.addEventListener('error', function(e) {
     console.log('Error en welcome.js:', e.error);
-    // Aquí podrías enviar el error a un servicio de logging
+  
 });
