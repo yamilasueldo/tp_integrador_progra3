@@ -24,6 +24,12 @@
         margin: 0;
     }
 
+    [role="list"] {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
     body {
         min-block-size: 100vh;
         line-height: 1.4;
@@ -83,8 +89,8 @@
         --color-9: #212529;  /* Negro */
 
         /* typography */
-        --ff-sans: 'Readex Pro', sans-serif;
-        --ff-mono: monospace;
+        --ff-sans: "Fira Sans", sans-serif;
+        --ff-sans-heading: "Outfit", sans-serif;
         
         /* border-radius */
         --border-radius-s: 0.25rem;
@@ -123,6 +129,13 @@
     h1 {
         font-size: var(--fs-xxl);
     }
+
+    h1, 
+    h2, 
+    h3, 
+    h4{
+        font-family: var(--ff-sans-heading);
+    }
 }
 
 @layer layout {
@@ -142,17 +155,25 @@
     }
 
     .wrapper {
-        --wrapper-max-width: 1130px;
+        --wrapper-max-width: 1200px;
         max-width: var(--wrapper-max-width);
         margin-inline: auto;
         padding-inline: 1rem;
+        box-sizing: content-box;
 
         &[data-width="narrow"] {
             --wrapper-max-width: 720px;
         }
+    }
 
-        &[data-width="wide"] {
-            --wrapper-max-width: 1440px;
+    .wrapper-products {
+        --wrapper-products-max-width: 100%;
+        margin-inline: auto;
+        padding-inline: 1rem;
+        box-sizing: content-box;
+
+        &[data-width="narrow"] {
+            --wrapper-max-width: 720px;
         }
     }
 
@@ -180,13 +201,17 @@
     }
 
     .grid-auto-fill {
-        --auto-fill-min-col-size: 250px;
+        width: 100%;
+        padding-inline: 4rem;
+        --auto-fit-min-col-size: 250px;
         display: grid;
         gap: var(--grid-auto-fill-gap, 1rem);
         grid-template-columns: repeat(
             auto-fill,
-            minmax(min(var(--auto-fill-min-col-size), 100%) 1fr)
+            minmax(min(var(--auto-fit-min-col-size), 100%), 1fr)
         );
+        --card-title-font-size: var(--fs-lg);
+        --card-gap: 0.75rem;
     }
 }
 
@@ -257,10 +282,9 @@
 
 
     .logo {
+        padding-block: 0.1rem;
         width: 90px;
-        height: 90px;
         object-fit: contain;
-        margin-bottom: 10px;
     }
 
 
@@ -273,13 +297,16 @@
     /*BARRA LATERAL IZQUIERDA  */
 
     .sidebar {
-        width: 250px;
+        max-width: 250px;
         background-color: var(--color-9);
         padding: 2rem 1rem;
         box-shadow: 2px 0 10px rgba(0,0,0,0.3);
         height: 100vh;
-        position: fixed;
+        position: sticky;
         display: none;
+        top: 0;
+        left: 0;
+        z-index: 10;
     }
 
     .sidebar.open {
@@ -292,18 +319,16 @@
         }
     }
 
-
-
     .sidebar h3 {
         color: var(--color-1);
         margin-bottom: 1.5rem;
-        font-size: 1.2rem;
         text-align: center;
+        letter-spacing: 1px;
     }
 
     .nav-item {
         background: var(--color-7);
-        border-radius: 10px;
+        border-radius: var(--border-radius-m);
         display: flex;
         flex-direction: column; /* Imagen arriba, texto abajo */
         align-items: center;
@@ -323,16 +348,16 @@
     }
 
     .nav-img {
-        width: 100px;
-        height: 100px;
+        width: 100%;
+        max-height: 140px;
         object-fit: contain;
         margin-bottom: 10px;
+        border-radius: var(--border-radius-s);
     }
 
     .nav-item span {
-        font-size: 16px;
-        font-weight: bold;
-        color: #ffffff;
+        font-weight: 700;
+        color: var(--color-1);
     }
 
     /* Contenido grid */
@@ -342,16 +367,24 @@
         gap: var(--card-gap, 1rem);
         padding: 1rem;
         border-radius: var(--border-radius-l);
-        background-color: var(--color-7); /* Cambiar color */
+        background-color: var(--color-7);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .card:hover {
+        transform: scale(1.05); /* Efecto al pasar el mouse */
+        background: var(--color-6);
+        border-color: var(--color-4);
+        box-shadow: 0 4px 15px rgba(255,255,255,0.1);
     }
 
     .card img {
-        width: 100%;
         border-radius: var(--border-radius-m);
     }
 
     .card-title {
-        font-size: var(--card-title-font-sizew, var(--fs-xl));
+        font-size: var(--card-title-font-size, var(--fs-xl));
         color: var(--card-title-color, var(--color-1));
     }
 
@@ -362,26 +395,49 @@
     }
 
     .tag-list li {
-        color: var(--color-8);
-        background-color: var(--tag-bg, var(--color-1));
+        font-family: var(--ff-sans-heading);
+        color: var(--tag-clr, var(--color-1));
+        background-color: var(--tag-bg, var(--color-6));
         padding: 0.125rem 0.5rem;
         font-size: var(--fs-sm);
         border-radius: var(--border-radius-s);
     }
 
+    .tag-list.accesorios {
+        --tag-bg: var(--color-1);
+        --tag-clr: var(--color-9);
+    }
+
+    .card-price {
+        font-family: var(--ff-sans-heading);
+        font-weight: 700;
+        font-size: var(--card-price-font-size, var(--fs-lg));
+        color: var(--card-price-color, var(--color-1));
+    }
+
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-block-start: auto;
+    }
+
     .button {
         display: inline-flex;
-        font-size: var(--fs-md);
+        font-size: var(--fs-base);
         text-decoration: none;
         justify-content: center;
         padding: 0.5rem 1rem;
         background-color: var(--color-9);
+        font-family: var(--ff-sans-heading);
+        font-weight: 400;
         cursor: pointer;
         border-radius: var(--border-radius-m);
         color: var(--color-1);
     }
 
-    .button:hover {
+    .button:hover, .button:focus {
         color: var(--color-9);
         background-color: var(--color-1);
     }
