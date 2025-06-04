@@ -574,12 +574,12 @@ form .input-group:last-of-type {
 }
 
 
-/* Variables adicionales para welcome */
+/* Variables adicionales para welcome - Actualizadas */
 :root {
-    --primary-blue: #007bff;
-    --primary-green: #28a745;
-    --welcome-gradient-1: #667eea;
-    --welcome-gradient-2: #764ba2;
+    --primary-blue: #6c757d;      /* Cambiado a gris oscuro */
+    --primary-green: #495057;     /* Cambiado a gris muy oscuro */
+    --welcome-gradient-1: #f8f9fa; /* Gris muy claro */
+    --welcome-gradient-2: #e9ecef; /* Gris claro */
 }
 
 /* Layout principal para welcome */
@@ -589,7 +589,7 @@ form .input-group:last-of-type {
     align-items: center;
     justify-content: center;
     padding: 2rem 1rem;
-    background: linear-gradient(135deg, var(--welcome-gradient-1) 0%, var(--welcome-gradient-2) 100%);
+    background: linear-gradient(135deg, var(--color-1) 0%, var(--color-2) 50%, var(--color-3) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -609,19 +609,19 @@ form .input-group:last-of-type {
 }
 
 .welcome-header h1 {
-    color: white;
+    color: var(--color-9);
     font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     letter-spacing: 0.5px;
 }
 
 .welcome-header p {
-    color: rgba(255,255,255,0.9);
+    color: var(--color-7);
     font-size: 1.3rem;
     font-weight: 300;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 /* Contenedor de selección de usuario */
@@ -634,13 +634,13 @@ form .input-group:last-of-type {
 
 /* Tarjetas de usuario */
 .user-card {
-    background: rgba(233, 213, 213, 0.95);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(15px);
     border-radius: 25px;
     padding: 3.5rem 2.5rem;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 2px solid transparent;
+    border: 2px solid var(--color-3);
     text-decoration: none;
     color: inherit;
     animation: fadeInUp 0.8s ease-out;
@@ -656,7 +656,7 @@ form .input-group:last-of-type {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(108, 117, 125, 0.1), transparent);
     transition: left 0.6s ease;
 }
 
@@ -667,31 +667,32 @@ form .input-group:last-of-type {
 .user-card:hover {
     transform: translateY(-12px) scale(1.03);
     box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-    border-color: rgba(255,255,255,0.8);
+    border-color: var(--color-6);
     text-decoration: none;
     color: inherit;
+    background: white;
 }
 
 /* Tarjeta específica de cliente */
 .cliente-card {
-    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05));
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.95), rgba(233, 236, 239, 0.95));
     animation-delay: 0.2s;
 }
 
 .cliente-card:hover {
-    background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(40, 167, 69, 0.08));
-    border-color: var(--primary-green);
+    background: linear-gradient(135deg, white, rgba(248, 249, 250, 0.98));
+    border-color: var(--color-7);
 }
 
 /* Tarjeta específica de admin */
 .admin-card {
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.05));
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.95), rgba(233, 236, 239, 0.95));
     animation-delay: 0.4s;
 }
 
 .admin-card:hover {
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.15), rgba(0, 123, 255, 0.08));
-    border-color: var(--primary-blue);
+    background: linear-gradient(135deg, white, rgba(248, 249, 250, 0.98));
+    border-color: var(--color-8);
 }
 
 /* Iconos de usuario */
@@ -707,11 +708,11 @@ form .input-group:last-of-type {
 }
 
 .cliente-card .user-icon {
-    color: var(--primary-green);
+    color: var(--color-7);
 }
 
 .admin-card .user-icon {
-    color: var(--primary-blue);
+    color: var(--color-8);
 }
 
 /* Títulos y texto de las tarjetas */
@@ -724,29 +725,33 @@ form .input-group:last-of-type {
 }
 
 .user-card p {
-    color: #6c757d;
+    color: var(--color-6);
     font-size: 1.05rem;
     line-height: 1.6;
     transition: color 0.3s ease;
 }
 
-.user-card:hover h3,
+.user-card:hover h3 {
+    color: var(--color-9);
+}
+
 .user-card:hover p {
-    color: var(--color-8);
+    color: var(--color-7);
 }
 
 /* Información del footer */
 .footer-info {
-    color: rgba(255,255,255,0.85);
+    color: var(--color-7);
     font-size: 1rem;
     margin-top: 2rem;
     animation: fadeIn 1s ease-out 0.6s both;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 /* Partículas flotantes */
 .floating-particle {
-    opacity: 0.6;
+    opacity: 0.3;
+    color: var(--color-5);
 }
 
 @keyframes float {
@@ -756,7 +761,7 @@ form .input-group:last-of-type {
 
 /* Estados de focus para accesibilidad */
 .user-card:focus {
-    outline: 3px solid rgba(255,255,255,0.8);
+    outline: 3px solid var(--color-6);
     outline-offset: 4px;
     transform: translateY(-5px) scale(1.02);
 }
