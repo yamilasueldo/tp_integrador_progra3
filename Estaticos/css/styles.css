@@ -573,4 +573,69 @@
         color: var(--color-8);
         text-decoration: none;
     }
+
+    .ticket-screen {
+        padding: 2rem;
+        background-color: var(--color-1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .ticket-container {
+        background: white;
+        padding: 2rem;
+        border-radius: var(--border-radius-m);
+    }
+
+    .nav-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--color-4);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .nav-bar h1 {
+        font-size: var(--fs-xl);
+        font-family: var(--ff-sans-heading);
+    }
+
+    .ticket-details {
+        margin-bottom: 2rem;
+    }
+
+    .ticket-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .ticket-table th,
+    .ticket-table td {
+        text-align: left;
+        padding: 0.5rem;
+        border-bottom: 1px solid var(--color-3);
+    }
+
+    .ticket-total {
+        margin-top: 1rem;
+        text-align: right;
+        font-size: var(--fs-lg);
+    }
+
+    .button.exit {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background-color: var(--color-6);
+        color: white;
+        text-align: center;
+        font-size: var(--fs-base);
+        border-radius: var(--border-radius-s);
+        text-decoration: none;
+        margin-top: 1rem;
+    }
+
+    .button.exit:hover {
+        background-color: var(--color-7);
+    }
 }
