@@ -136,6 +136,15 @@
     h4{
         font-family: var(--ff-sans-heading);
     }
+
+    a {
+        text-decoration: none;
+        text-underline-offset: 2px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
 }
 
 @layer layout {
@@ -480,4 +489,88 @@
         background-color: var(--color-8);
     }
 
+    .cart-container {
+        background-color: var(--color-1);
+        padding: 2rem;
+        border-radius: var(--border-radius-m);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .cart-items li {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        flex-wrap: wrap;
+        gap: 1rem;
+        border-bottom: 1px solid var(--color-3);
+        padding-block: 0.5rem;
+    }
+
+    .cart-img {
+        width: 100px;
+        object-fit: contain;
+        border-radius: var(--border-radius-s);
+    }
+
+    .cart-price {
+        font-family: var(--ff-sans-heading);
+        font-weight: 700;
+        font-size: var(--fs-lg);
+        text-align: right;
+    }
+
+    .cart-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    }
+
+    .cart-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 1rem;
+        background-color: var(--color-4);
+        border: none;
+        border-radius: var(--border-radius-s);
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .cart-btn:hover {
+        background-color: var(--color-5);
+    }
+
+    .cart-qty {
+        font-weight: 700;
+    }
+
+    .delete-btn {
+        background-color: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: var(--color-7);
+        transition: color 0.2s;
+    }
+
+    .delete-btn:hover {
+        color: #dc3545;
+    }
+
+    .empty-cart {
+        display: inline-block;
+        color: var(--color-6);
+        font-size: var(--fs-base);
+        cursor: pointer;
+        margin-bottom: 1rem;
+    }
+
+    .empty-cart:hover {
+        color: var(--color-8);
+        text-decoration: none;
+    }
 }
