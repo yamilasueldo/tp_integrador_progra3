@@ -489,7 +489,7 @@
         background-color: var(--color-8);
     }
 
-    .cart-container {
+    .cart-container, .ticket-container {
         background-color: var(--color-1);
         padding: 2rem;
         border-radius: var(--border-radius-m);
@@ -524,10 +524,10 @@
     }
 
     .cart-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
     }
 
     .cart-btn {
@@ -574,37 +574,6 @@
         text-decoration: none;
     }
 
-    .ticket-screen {
-        padding: 2rem;
-        background-color: var(--color-1);
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .ticket-container {
-        background: white;
-        padding: 2rem;
-        border-radius: var(--border-radius-m);
-    }
-
-    .nav-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 2px solid var(--color-4);
-        padding-bottom: 1rem;
-        margin-bottom: 2rem;
-    }
-
-    .nav-bar h1 {
-        font-size: var(--fs-xl);
-        font-family: var(--ff-sans-heading);
-    }
-
-    .ticket-details {
-        margin-bottom: 2rem;
-    }
-
     .ticket-table {
         width: 100%;
         border-collapse: collapse;
@@ -617,13 +586,14 @@
         border-bottom: 1px solid var(--color-3);
     }
 
-    .ticket-total {
-        margin-top: 1rem;
-        text-align: right;
+    .ticket-price {
+        font-family: var(--ff-sans-heading);
+        font-weight: 700;
         font-size: var(--fs-lg);
+        text-align: right;
     }
 
-    .button.exit {
+    /* .button.exit {
         display: inline-block;
         padding: 0.8rem 1.5rem;
         background-color: var(--color-6);
@@ -633,9 +603,9 @@
         border-radius: var(--border-radius-s);
         text-decoration: none;
         margin-top: 1rem;
-    }
+    } */
 
-    .button.exit:hover {
+    /* .button.exit:hover {
         background-color: var(--color-7);
-    }
+    } */
 }
