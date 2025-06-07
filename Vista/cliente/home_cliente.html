@@ -18,10 +18,10 @@
             <img src="../../Estaticos/img/favicon.png" alt="Logo" class="logo">
             <h1>DATA DREAM</h1>
             <!-- Carrito de compras -->
-            <div class="cart" onclick="toggleCart()">
+            <a href="carrito.html" class="cart" onclick="toggleCart()">
                 🛒
                 <div class="cart-count">0</div>
-            </div>
+            </a>
         </nav>
     </header>
 
@@ -33,135 +33,24 @@
                     <img src="../../Estaticos/img/todos.jpg" alt="Todos los Productos" class="nav-img">
                     <span>TODOS LOS PRODUCTOS</span>
                 </div>
-                <div class="nav-item" onclick="filterProducts('clothes')">
+                <div class="nav-item" onclick="filterProducts('ropa')">
                     <img src="../../Estaticos/img/clothes.jpg" alt="Ropa" class="nav-img">
                     <span>ROPA</span>
                 </div>
-                <div class="nav-item" onclick="filterProducts('accesories')">
+                <div class="nav-item" onclick="filterProducts('accesorios')">
                     <img src="../../Estaticos/img/accesories.jpg" alt="Accesorios" class="nav-img">
                     <span>ACCESORIOS</span>
                 </div>
             </div>
             <!-- Contenido principal -->
-            <div class="section grid-auto-fill">
+            <div id="productos-container" class="section grid-auto-fill">
                 <!-- Grilla de productos -->
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../Estaticos/img/img1.png" alt="">
-                    </div>
-                    <div class="card-info flow">
-                        <h3 class="card-title">Remera 10</h3>
-                        <ul class="tag-list accesorios" role="list">
-                            <li>
-                                accesorios
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button-container"><p class="card-price">$15000</p><button class="button">Agregar</button></div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../Estaticos/img/img1.png" alt="">
-                    </div>
-                    <div class="card-info flow">
-                        <h3 class="card-title">Remera 10</h3>
-                        <ul class="tag-list" role="list">
-                            <li>
-                                ropa
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button-container"><p class="card-price">$15000</p><button class="button">Agregar</button></div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../Estaticos/img/img1.png" alt="">
-                    </div>
-                    <div class="card-info flow">
-                        <h3 class="card-title">Remera 10</h3>
-                        <ul class="tag-list" role="list">
-                            <li>
-                                ropa
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button-container"><p class="card-price">$15000</p><button class="button">Agregar</button></div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../Estaticos/img/img1.png" alt="">
-                    </div>
-                    <div class="card-info flow">
-                        <h3 class="card-title">Remera 10</h3>
-                        <ul class="tag-list" role="list">
-                            <li>
-                                ropa
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button-container"><p class="card-price">$15000</p><button class="button">Agregar</button></div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../Estaticos/img/img1.png" alt="">
-                    </div>
-                    <div class="card-info flow">
-                        <h3 class="card-title">Remera 10</h3>
-                        <ul class="tag-list" role="list">
-                            <li>
-                                ropa
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button-container"><p class="card-price">$15000</p><button class="button">Agregar</button></div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../Estaticos/img/img1.png" alt="">
-                    </div>
-                    <div class="card-info flow">
-                        <h3 class="card-title">Remera 10</h3>
-                        <ul class="tag-list" role="list">
-                            <li>
-                                ropa
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button-container"><p class="card-price">$15000</p><button class="button">Agregar</button></div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../Estaticos/img/img1.png" alt="">
-                    </div>
-                    <div class="card-info flow">
-                        <h3 class="card-title">Remera 10</h3>
-                        <ul class="tag-list accesorios" role="list">
-                            <li>
-                                accesorios
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button-container"><p class="card-price">$15000</p><button class="button">Agregar</button></div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../Estaticos/img/img1.png" alt="">
-                    </div>
-                    <div class="card-info flow">
-                        <h3 class="card-title">Remera 10</h3>
-                        <ul class="tag-list" role="list">
-                            <li>
-                                ropa
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet </p>
-                    </div>
-                    <div class="button-container"><p class="card-price">$15000</p><button class="button">Agregar</button></div>
-                </div>
             </div>
         </section>
     </main>
-
+    
+    <script src="../../Estaticos/js/carrito.js"></script>
+    <script src="../../Estaticos/js/productos.js"></script>
     <script src="../../main.js"></script>
 </body>
 </html>
