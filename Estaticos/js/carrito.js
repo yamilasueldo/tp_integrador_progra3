@@ -114,3 +114,11 @@ emptyCartBtn.addEventListener('click', e => {
     e.preventDefault();
     vaciarCarrito();
 });
+
+function finalizarCompra() {
+    if (carrito.length === 0) {
+        alert("El carrito está vacío. Agregá al menos un producto antes de finalizar la compra.");
+        return;
+    }
+    window.location.href = 'tickets.html';
+}
