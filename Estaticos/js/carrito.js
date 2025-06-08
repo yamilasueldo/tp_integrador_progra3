@@ -4,12 +4,6 @@ actualizarContadorCarrito();
 mostrarProductosEnCarrito();
 actualizarTotal();
 
-// function agregarAlCarrito(producto) {
-//     carrito.push(producto);
-//     guardarYActualizar();
-//     console.log("Producto agregado:", producto);
-// }
-
 function agregarAlCarrito(productoNuevo) {
     // Buscamos un producto igual (mismo id y talle)
     const productoExistente = carrito.find(p => p.id === productoNuevo.id && p.talle === productoNuevo.talle);
@@ -24,7 +18,6 @@ function agregarAlCarrito(productoNuevo) {
     }
 
     guardarYActualizar();
-    console.log("Producto agregado:", productoNuevo);
 }
 
 function actualizarContadorCarrito() {
@@ -36,7 +29,8 @@ function actualizarContadorCarrito() {
 
 function mostrarProductosEnCarrito() {
     const listaCarrito = document.querySelector('.cart-items');
-    listaCarrito.innerHTML = '';  // limpio antes de mostrar
+    if (!listaCarrito) return;
+    listaCarrito.innerHTML = ''; 
 
     carrito.forEach(producto => {
         const li = document.createElement('li');
@@ -93,6 +87,7 @@ function vaciarCarrito() {
 
 function actualizarTotal() {
     const totalElem = document.getElementById('cart-total');
+    if (!totalElem) return;
     let total = 0;
     carrito.forEach(producto => {
         const cantidad = producto.cantidad || 1;
