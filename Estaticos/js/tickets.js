@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const nombreUsuario = localStorage.getItem("nombreUsuario") || "Invitado";
+    const saludo = document.querySelector(".ticket-container h2");
+    if (saludo) {
+        saludo.textContent = `Hola, ${nombreUsuario}`;
+    }
+
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     const tbody = document.querySelector(".ticket-table tbody");
     const totalElem = document.querySelector(".ticket-price h3");
