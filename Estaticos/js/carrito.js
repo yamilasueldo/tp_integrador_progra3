@@ -104,7 +104,7 @@ function guardarYActualizar() {
 }
 
 // Enlazar botón vaciar carrito
-const emptyCartBtn = document.querySelector('.empty-cart');
+const emptyCartBtn = document.querySelector('#emptyCart');
 emptyCartBtn.addEventListener('click', e => {
     e.preventDefault();
     vaciarCarrito();
