@@ -6,7 +6,7 @@ actualizarTotal();
 
 function agregarAlCarrito(productoNuevo) {
     // Buscamos un producto igual (mismo id y talle)
-    const productoExistente = carrito.find(p => p.id === productoNuevo.id && p.talle === productoNuevo.talle);
+    const productoExistente = carrito.find(p => p.id === productoNuevo.id);
 
     if (productoExistente) {
         // Si existe, aumentamos la cantidad
@@ -70,12 +70,12 @@ function mostrarProductosEnCarrito() {
         });
 
         btnEliminar.addEventListener('click', () => {
-            eliminarProducto(producto.id);
+            eliminarDelCarrito(producto.id);
         });
     });
 }
 
-function eliminarProducto(id) {
+function eliminarDelCarrito(id) {
     carrito = carrito.filter(producto => producto.id !== id);
     guardarYActualizar();
 }
@@ -105,10 +105,12 @@ function guardarYActualizar() {
 
 // Enlazar botón vaciar carrito
 const emptyCartBtn = document.querySelector('#emptyCart');
-emptyCartBtn.addEventListener('click', e => {
-    e.preventDefault();
-    vaciarCarrito();
-});
+if (emptyCartBtn) {
+    emptyCartBtn.addEventListener('click', e => {
+        e.preventDefault();
+        vaciarCarrito();
+    });
+}
 
 function finalizarCompra() {
     if (carrito.length === 0) {
