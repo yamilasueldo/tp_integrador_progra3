@@ -78,6 +78,7 @@
 @layer base {
     :root {
         /* colors */
+        --color-0: #ffffff;
         --color-1: #f8f9fa;  /* Gris muy claro */
         --color-2: #e9ecef;  /* Gris claro */
         --color-3: #dee2e6;  /* Gris medio claro */
@@ -87,6 +88,26 @@
         --color-7: #495057;  /* Gris muy oscuro */
         --color-8: #343a40;  /* Negro grisáceo */
         --color-9: #212529;  /* Negro */
+        --color-10: hsl(9, 8%, 16%);
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--color-8);
+            }
+
+            .cart-container, .ticket-container {
+                background-color: var(--color-6) !important;
+                color: var(--color-1) !important;
+            }
+
+            .empty-cart {
+                color: var(--color-1) !important;
+            }
+
+            .empty-cart:hover {
+                color: var(--color-9) !important;
+            }
+        }
 
         /* typography */
         --ff-sans: "Fira Sans", sans-serif;
