@@ -117,5 +117,5 @@ function finalizarCompra() {
         alert("El carrito está vacío. Agregá al menos un producto antes de finalizar la compra.");
         return;
     }
-    window.location.href = 'tickets.html';
+    window.location.href = '../ticket/tickets.html';
 }
