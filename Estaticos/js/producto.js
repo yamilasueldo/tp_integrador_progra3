@@ -5,14 +5,16 @@ class Producto{
     precio;
     imagen;
     cantidad;
+    estado;
 
-    constructor(id, nombre, categoria, precio, imagen, cantidad) {
+    constructor(id, nombre, categoria, precio, imagen, cantidad, estado) {
         this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
         this.precio = precio;
         this.imagen = imagen;
         this.cantidad = cantidad;
+        this.estado = estado;
     }
 
     toJsonString() {
@@ -21,7 +23,7 @@ class Producto{
 
     static createFromJsonString(json) {
         const jsonParsed = JSON.parse(json);
-        return new Producto(jsonParsed.id, jsonParsed.nombre, jsonParsed.categoria, jsonParsed.precio, jsonParsed.imagen, jsonParsed.cantidad);
+        return new Producto(jsonParsed.id, jsonParsed.nombre, jsonParsed.categoria, jsonParsed.precio, jsonParsed.imagen, jsonParsed.cantidad, jsonParsed.estado);
     }
 
     createHtmlElement(){

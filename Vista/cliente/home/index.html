@@ -18,7 +18,7 @@
             <img src="../../../Estaticos/img/favicon.png" alt="Logo" class="logo">
             <h1>DATA DREAM</h1>
             <!-- Carrito de compras -->
-            <a href="carrito.html" class="cart" onclick="toggleCart()">
+            <a href="../carrito/carrito.html" class="cart" onclick="toggleCart()">
                 🛒
                 <div class="cart-count">0</div>
             </a>
@@ -29,7 +29,18 @@
         <section class="sidebar-wrapper">
             <div class="sidebar">
                 <h3>CATEGORÍAS</h3>
-                    <span>ACCESORIOS</span>
+                    <div class="nav-item active" id="filtro-todos">
+                        <img src="../../../Estaticos/img/todos.jpg" alt="Todos los Productos" class="nav-img">
+                        <span>TODOS LOS PRODUCTOS</span>
+                    </div>
+                    <div class="nav-item" id="filtro-ropa">
+                        <img src="../../../Estaticos/img/clothes.jpg" alt="Ropa" class="nav-img">
+                        <span>ROPA</span>
+                    </div>
+                    <div class="nav-item" id="filtro-accesorios">
+                        <img src="../../../Estaticos/img/accesories.jpg" alt="Accesorios" class="nav-img">
+                        <span>ACCESORIOS</span>
+                    </div>
                 </div>
             </div>
             <div class="section grid-container">
@@ -45,9 +56,9 @@
         </section>
     </main>
     
-    <script src="../../Estaticos/js/producto.js"></script>
-    <script src="../../Estaticos/js/carrito.js"></script>
-    <script src="../../Estaticos/js/productos.js"></script>
-    <script src="../../main.js"></script>
+    <script src="../../../Estaticos/js/producto.js"></script>
+    <script src="../../../Estaticos/js/carrito.js"></script>
+    <script src="../../../Estaticos/js/productos.js"></script>
+    <script src="../../../main.js"></script>
 </body>
 </html>

@@ -47,17 +47,20 @@ class Control {
     cargaInicial() {
         this.Vista.SeccionPrincipal.divProductos.innerHTML = "";
 
-        fetch("../../Estaticos/js/productos.json")
+        fetch("../../../Estaticos/js/productos.json")
         .then(res => res.json())
         .then(data => {
-            let productos = data.map(productoData => {
+            let productos = data
+            .filter(productoData => productoData.estado === true)
+            .map(productoData => {
                 return new Producto(
                     productoData.id,
                     productoData.nombre,
                     productoData.categoria,
                     productoData.precio,
                     productoData.imagen,
-                    productoData.cantidad
+                    productoData.cantidad,
+                    productoData.estado
                 );
             })
             this.Modelo.Productos = productos;
@@ -85,7 +88,7 @@ class Control {
         let productos = this.Modelo.Productos;
 
         const filtrados = categoria === "all"
-            ? productos
+            ? productos.filter(p => p.estado === true)
             : productos.filter(p => p.categoria === categoria);
 
         this.actualizarVistaProductos(filtrados);
