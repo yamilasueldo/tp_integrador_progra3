@@ -23,7 +23,8 @@ function agregarAlCarrito(productoNuevo) {
 function actualizarContadorCarrito() {
     const contador = document.querySelector(".cart-count");
     if (contador) {
-        contador.textContent = carrito.length;
+        const totalItems = carrito.reduce((acc, prod) => acc + (prod.cantidad || 1), 0);
+        contador.textContent = totalItems;
     }
 }
 
@@ -117,5 +118,5 @@ function finalizarCompra() {
         alert("El carrito está vacío. Agregá al menos un producto antes de finalizar la compra.");
         return;
     }
-    window.location.href = 'tickets.html';
+    window.location.href = '../ticket/tickets.html';
 }
