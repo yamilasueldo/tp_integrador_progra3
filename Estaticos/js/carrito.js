@@ -23,7 +23,8 @@ function agregarAlCarrito(productoNuevo) {
 function actualizarContadorCarrito() {
     const contador = document.querySelector(".cart-count");
     if (contador) {
-        contador.textContent = carrito.length;
+        const totalItems = carrito.reduce((acc, prod) => acc + (prod.cantidad || 1), 0);
+        contador.textContent = totalItems;
     }
 }
 
