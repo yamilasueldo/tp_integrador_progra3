@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../../Estaticos/css/styles_admin.css" />
+  <title>Iniciar Sesión</title>
+</head>
+<body>
+  <!-- Botón de regreso -->
+  <a href="/Vista/welcome/index.html" class="back-button">
+    <span class="back-arrow">←</span>
+    <span class="back-text">Volver</span>
+  </a>
+
+  <main class="login-main">
+    <div class="login-container">
+      <!-- Slider de imágenes -->
+      <div class="slider-section">
+        <div class="slider-container">
+          <div class="slider-wrapper">
+            <div class="slide active">
+              <img src="../../../Estaticos/img/home/img_home1.png" alt="Imagen 1" />
+              <div class="slide-content">
+                <h3>Bienvenido a nuestra plataforma</h3>
+                <p>Descubre todas las funcionalidades que tenemos para ti</p>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="../../../Estaticos/img/home/img_home2.png" alt="Imagen 2" />
+              <div class="slide-content">
+                <h3>Gestiona tu contenido</h3>
+                <p>Administra todo desde un solo lugar de manera sencilla</p>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="../../../Estaticos/img/home/img_home3.png" alt="Imagen 3" />
+              <div class="slide-content">
+                <h3>Conecta con tu audiencia</h3>
+                <p>Herramientas poderosas para hacer crecer tu comunidad</p>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="../../../Estaticos/img/home/img_home4.png" alt="Imagen 4" />
+              <div class="slide-content">
+                <h3>Analiza tus resultados</h3>
+                <p>Métricas detalladas para optimizar tu estrategia</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Indicadores -->
+          <div class="slider-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de login -->
+      <div class="form-section">
+        <div class="card">
+          <h3>Iniciar Sesión</h3>
+          <form>
+            <div class="input-group">
+              <input type="email" id="email" placeholder=" " required />
+              <label for="email">Correo electrónico</label>
+            </div>
+
+            <div class="input-group">
+              <input type="password" id="password" placeholder=" " required />
+              <label for="password">Contraseña</label>
+            </div>
+
+            <a href="../home/index.html" class="btn-submit">Ingresar</a>
+
+            <div class="divider">
+              <span>O ingresa como</span>
+            </div>
+
+            <button type="button" class="btn-guest">
+              <span class="guest-icon">👤</span>
+              Invitado
+            </button>
+
+            <div class="login-link">
+              <small>¿No tienes cuenta? <a href="../register/index.html">Registrate</a></small>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DATA DREAM -  Yamila Sueldo - Tomas Blanco Rivas. Todos los derechos reservados.</p>
+  </footer>
+  <script src="../../../Estaticos/js/login.js" type="module"></script>
+</body>
+</html>
