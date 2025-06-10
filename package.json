@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/yamilasueldo/tp_integrador_progra3/issues"
   },
-  "homepage": "https://github.com/yamilasueldo/tp_integrador_progra3#readme"
+  "homepage": "https://github.com/yamilasueldo/tp_integrador_progra3#readme",
+  "keywords": [],
+  "dependencies": {
+    "mysql2": "^3.14.1",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
 }
