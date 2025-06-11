@@ -41,9 +41,10 @@ class Control {
 
     procesarLogin = () => {
         const nombre = this.Vista.FormCliente.txtNombre.value.trim();
+        let errorSpan = document.getElementById("errorNombre");
 
         if (nombre === "") {
-            alert("Por favor, ingresá tu nombre.");
+            errorSpan.textContent = "Por favor, ingresa tu nombre.";
         } else {
             localStorage.setItem("nombreUsuario", nombre);
             window.location.href = "../home/index.html";
