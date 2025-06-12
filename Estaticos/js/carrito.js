@@ -153,12 +153,55 @@ class CarritoControl {
         totalElem.textContent = total.toLocaleString();
     }
 
-    finalizarCompra() {
+    async finalizarCompra() {
         if (this.Modelo.carrito.length === 0) {
             alert("El carrito está vacío. Agregá al menos un producto antes de finalizar la compra.");
             return;
         }
-        window.location.href = '../ticket/tickets.html';
+
+        const confirmacion = confirm("¿Querés confirmar la compra?");
+
+        if (!confirmacion) {
+            return;
+        }
+
+        try {
+            await this.guardarVenta();
+            window.location.href = '../ticket/tickets.html';
+        } catch (error) {
+            console.error("Error al guardar la venta:", error);
+            return;
+        }
+    }
+
+    async guardarVenta() {
+        const nombreUsuario = localStorage.getItem("nombreUsuario") || "Invitado";
+        const productos = this.Modelo.carrito;
+        const total = productos.reduce((sum, prod) => sum + (prod.precio * (prod.cantidad || 1)), 0);
+        const fecha = new Date().toISOString();
+
+        const venta = {
+            usuario: nombreUsuario,
+            productos,
+            total,
+            fecha
+        };
+
+        const ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+        ventas.push(venta);
+        localStorage.setItem("ventas", JSON.stringify(ventas));
+
+        // const respuesta = await fetch("/api/ventas", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(venta)
+        // });
+
+        // if (!respuesta.ok) {
+        //     throw new Error("Error al guardar la venta.");
+        // }
     }
 }
 
