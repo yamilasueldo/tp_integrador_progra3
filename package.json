@@ -18,6 +18,7 @@
   "homepage": "https://github.com/yamilasueldo/tp_integrador_progra3#readme",
   "keywords": [],
   "dependencies": {
+    "express": "^5.1.0",
     "mysql2": "^3.14.1",
     "sequelize": "^6.37.7"
   },
