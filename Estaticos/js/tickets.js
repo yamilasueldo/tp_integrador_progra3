@@ -57,7 +57,7 @@ class VistaTickets {
         }
     }
 
-    mostrarProductos(carrito) {
+    createProductos(carrito) {
         if (!this.tbody) return;
 
         this.tbody.innerHTML = "";
@@ -81,6 +81,15 @@ class VistaTickets {
             this.totalElem.textContent = `Total de la compra: $${total.toLocaleString()}`;
         }
     }
+
+    createFechaActual() {
+        const fechaElem = document.querySelector(".ticket-date");
+
+        if (fechaElem) {
+            const fechaActual = new Date().toLocaleDateString();
+            fechaElem.textContent = `Fecha de compra: ${fechaActual}`;
+        }
+    }
 }
 
 class ControlTickets {
@@ -102,10 +111,11 @@ class ControlTickets {
 
     iniciar() {
         this.vista.createSaludo(this.modelo.nombreUsuario);
-        this.vista.mostrarProductos(this.modelo.carrito);
+        this.vista.createFechaActual();
+        this.vista.createProductos(this.modelo.carrito);
 
         const total = this.calcularTotal();
-        this.vista.mostrarTotal(total);
+        this.vista.createTotal(total);
 
         this.limpiarCarrito();
     }

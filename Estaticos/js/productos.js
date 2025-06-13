@@ -30,6 +30,8 @@ class Control {
         this.Modelo = p_modelo;
         this.Vista = p_vista;
         this.filtroActual = "all"; 
+        this.paginaActual = 1;
+        this.productosPorPagina = 4;
 
         this.cargaInicial();
 
@@ -43,6 +45,23 @@ class Control {
 
         document.getElementById("filtro-accesorios").addEventListener("click", () => {
             this.filterProducts("accesorios");
+        });
+
+        this.Vista.SeccionPrincipal.btnAnterior.addEventListener("click", () => {
+            if (this.paginaActual > 1) {
+                this.paginaActual--;
+                const filtrados = this.obtenerProductosFiltrados();
+                this.actualizarVistaProductos(filtrados);
+            }
+        });
+        
+        this.Vista.SeccionPrincipal.btnSiguiente.addEventListener("click", () => {
+            const filtrados = this.obtenerProductosFiltrados();
+            const maxPaginas = Math.ceil(filtrados.length / this.productosPorPagina);
+            if (this.paginaActual < maxPaginas) {
+                this.paginaActual++;
+                this.actualizarVistaProductos(filtrados);
+            }
         });
     }
 
@@ -79,25 +98,36 @@ class Control {
     actualizarVistaProductos(lista) {
         this.Vista.SeccionPrincipal.divProductos.innerHTML = "";
 
-        lista.forEach(producto => {
+        const inicio = (this.paginaActual - 1) * this.productosPorPagina;
+        const fin = inicio + this.productosPorPagina;
+        const productosPagina = lista.slice(inicio, fin);
+
+        productosPagina.forEach(producto => {
             const htmlElement = producto.createHtmlElement(this);
             this.Vista.SeccionPrincipal.divProductos.appendChild(htmlElement);
         });
+
+        this.Vista.SeccionPrincipal.btnAnterior.style.display = this.paginaActual === 1 ? 'none' : 'inline-block';
+        this.Vista.SeccionPrincipal.btnSiguiente.style.display = fin >= lista.length ? 'none' : 'inline-block';
+    }
+
+    obtenerProductosFiltrados() {
+        let productos = this.Modelo.Productos;
+        return this.filtroActual === "all"
+            ? productos.filter(p => p.estado === true)
+            : productos.filter(p => p.categoria === this.filtroActual);
     }
 
     filterProducts(categoria) {
         this.filtroActual = categoria;
-        let productos = this.Modelo.Productos;
-
-        const filtrados = categoria === "all"
-            ? productos.filter(p => p.estado === true)
-            : productos.filter(p => p.categoria === categoria);
-
+        this.paginaActual = 1;
+        const filtrados = this.obtenerProductosFiltrados();
         this.actualizarVistaProductos(filtrados);
     }
 
     refrescarProductos() {
-        this.filterProducts(this.filtroActual);
+        const filtrados = this.obtenerProductosFiltrados();
+        this.actualizarVistaProductos(filtrados);
     }
 }
 

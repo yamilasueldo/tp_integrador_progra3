@@ -89,5 +89,32 @@
     "imagen": "../../../Estaticos/img/img-09.jpg",
     "cantidad": 1,
     "estado": true
+  },
+    {
+    "id": 11,
+    "nombre": "Billetera 2",
+    "categoria": "accesorios",
+    "precio": 16000,
+    "imagen": "../../../Estaticos/img/img-09.jpg",
+    "cantidad": 1,
+    "estado": true
+  },
+    {
+    "id": 12,
+    "nombre": "Billetera 2",
+    "categoria": "accesorios",
+    "precio": 16000,
+    "imagen": "../../../Estaticos/img/img-09.jpg",
+    "cantidad": 1,
+    "estado": true
+  },
+    {
+    "id": 13,
+    "nombre": "Billetera 2",
+    "categoria": "accesorios",
+    "precio": 16000,
+    "imagen": "../../../Estaticos/img/img-09.jpg",
+    "cantidad": 1,
+    "estado": true
   }
 ]
