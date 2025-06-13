@@ -1,3 +1,5 @@
+import { Producto } from './producto.js'
+
 class Modelo {
     Productos;
 
@@ -78,7 +80,7 @@ class Control {
         this.Vista.SeccionPrincipal.divProductos.innerHTML = "";
 
         lista.forEach(producto => {
-            const htmlElement = producto.createHtmlElement();
+            const htmlElement = producto.createHtmlElement(this);
             this.Vista.SeccionPrincipal.divProductos.appendChild(htmlElement);
         });
     }

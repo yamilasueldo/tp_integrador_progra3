@@ -1,35 +1,120 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const nombreUsuario = localStorage.getItem("nombreUsuario") || "Invitado";
-    const saludo = document.querySelector(".ticket-container h2");
-    if (saludo) {
-        saludo.textContent = `Hola, ${nombreUsuario}`;
+// document.addEventListener("DOMContentLoaded", () => {
+//     const nombreUsuario = localStorage.getItem("nombreUsuario") || "Invitado";
+//     const saludo = document.querySelector(".ticket-container h2");
+//     if (saludo) {
+//         saludo.textContent = `Hola, ${nombreUsuario}`;
+//     }
+
+//     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+//     const tbody = document.querySelector(".ticket-table tbody");
+//     const totalElem = document.querySelector(".ticket-price h3");
+
+//     tbody.innerHTML = ""; // limpiar contenido actual
+
+//     let total = 0;
+
+//     carrito.forEach(producto => {
+//         const cantidad = producto.cantidad || 1;
+//         const subtotal = producto.precio * cantidad;
+//         total += subtotal;
+
+//         const fila = document.createElement("tr");
+//         fila.innerHTML = `
+//             <td>${producto.nombre}</td>
+//             <td>$${producto.precio.toLocaleString()}</td>
+//             <td>${cantidad}</td>
+//             <td>$${subtotal.toLocaleString()}</td>
+//         `;
+//         tbody.appendChild(fila);
+//     });
+
+//     totalElem.textContent = `Total de la compra: $${total.toLocaleString()}`;
+
+//     // Si querés, también podés limpiar el carrito después de mostrarlo
+//     localStorage.removeItem("carrito");
+// });
+
+class ModeloTickets {
+    nombreUsuario;
+    carrito;
+
+    constructor() {
+        this.nombreUsuario = localStorage.getItem("nombreUsuario") || "Invitado";
+        this.carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    }
+}
+
+class VistaTickets {
+    constructor() {
+        this.textSaludo = document.querySelector(".ticket-container h2");
+        this.tbody = document.querySelector(".ticket-table tbody");
+        this.totalElem = document.querySelector(".ticket-price h3");
     }
 
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    const tbody = document.querySelector(".ticket-table tbody");
-    const totalElem = document.querySelector(".ticket-price h3");
+    createSaludo(nombreUsuario) {
+        if (this.textSaludo) {
+            this.textSaludo.textContent = `Hola, ${nombreUsuario}`;
+        }
+    }
 
-    tbody.innerHTML = ""; // limpiar contenido actual
+    mostrarProductos(carrito) {
+        if (!this.tbody) return;
 
-    let total = 0;
+        this.tbody.innerHTML = "";
+        carrito.forEach(producto => {
+            const cantidad = producto.cantidad || 1;
+            const subtotal = producto.precio * cantidad;
 
-    carrito.forEach(producto => {
-        const cantidad = producto.cantidad || 1;
-        const subtotal = producto.precio * cantidad;
-        total += subtotal;
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+                <td>${producto.nombre}</td>
+                <td>$${producto.precio.toLocaleString()}</td>
+                <td>${cantidad}</td>
+                <td>$${subtotal.toLocaleString()}</td>
+            `;
+            this.tbody.appendChild(fila);
+        });
+    }
 
-        const fila = document.createElement("tr");
-        fila.innerHTML = `
-            <td>${producto.nombre}</td>
-            <td>$${producto.precio.toLocaleString()}</td>
-            <td>${cantidad}</td>
-            <td>$${subtotal.toLocaleString()}</td>
-        `;
-        tbody.appendChild(fila);
-    });
+    createTotal(total) {
+        if (this.totalElem) {
+            this.totalElem.textContent = `Total de la compra: $${total.toLocaleString()}`;
+        }
+    }
+}
 
-    totalElem.textContent = `Total de la compra: $${total.toLocaleString()}`;
+class ControlTickets {
+    constructor(modelo, vista) {
+        this.modelo = modelo;
+        this.vista = vista;
+    }
 
-    // Si querés, también podés limpiar el carrito después de mostrarlo
-    localStorage.removeItem("carrito");
+    calcularTotal() {
+        return this.modelo.carrito.reduce((total, producto) => {
+            const cantidad = producto.cantidad || 1;
+            return total + producto.precio * cantidad;
+        }, 0);
+    }
+
+    limpiarCarrito() {
+        localStorage.removeItem("carrito");
+    }
+
+    iniciar() {
+        this.vista.createSaludo(this.modelo.nombreUsuario);
+        this.vista.mostrarProductos(this.modelo.carrito);
+
+        const total = this.calcularTotal();
+        this.vista.mostrarTotal(total);
+
+        this.limpiarCarrito();
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modelo = new ModeloTickets();
+    const vista = new VistaTickets();
+    const control = new ControlTickets(modelo, vista);
+
+    control.iniciar();
 });

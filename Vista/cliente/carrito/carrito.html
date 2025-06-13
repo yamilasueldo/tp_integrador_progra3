@@ -35,17 +35,17 @@
                         <a href="#" id="emptyCart" class="empty-cart">🧺 Vaciar carrito</a>
                         <a href="../home/index.html" class="empty-cart">🛒 Seguir comprando</a>
                     </div>
-                    <ul class="cart-items flow" role="list">
+                    <ul id="cart-items" class="cart-items flow" role="list">
                         <!-- Los productos agregados se insertarán acá con JS -->
                     </ul>
                     <p class="cart-price">Total: $<span id="cart-total">0</span></p>
-                    <button class="button" onclick="finalizarCompra()">Finalizar compra</button>
+                    <button class="button" id="btnFinalizarCompra">Finalizar compra</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="../../../Estaticos/js/carrito.js"></script>
+    <script type="module" src="../../../Estaticos/js/carrito.js"></script>
     <script src="../../../main.js"></script>
 </body>
 </html>

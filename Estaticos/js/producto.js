@@ -1,3 +1,5 @@
+import { carritoControl } from './carrito.js';
+
 class Producto{
     id;
     nombre;
@@ -26,11 +28,11 @@ class Producto{
         return new Producto(jsonParsed.id, jsonParsed.nombre, jsonParsed.categoria, jsonParsed.precio, jsonParsed.imagen, jsonParsed.cantidad, jsonParsed.estado);
     }
 
-    createHtmlElement(){
+    createHtmlElement(control){
         const div = document.createElement("div");
         div.classList.add("card");
 
-        const estaEnCarrito = carrito.some(item => item.id === this.id);
+        const estaEnCarrito = carritoControl.Modelo.carrito.some(item => item.id === this.id);
 
         div.innerHTML = `
             <div class="card-image">
@@ -62,7 +64,7 @@ class Producto{
         if (btnQuitar) {
             btnQuitar.addEventListener("click", (e) => {
                 e.preventDefault();
-                const productoEnCarrito = carrito.find(p => p.id === this.id);
+                const productoEnCarrito = carritoControl.Modelo.carrito.find(p => p.id === this.id);
                 
                 if (!productoEnCarrito) {
                     alert("Este producto no está en el carrito.");
@@ -72,7 +74,7 @@ class Producto{
                 if (productoEnCarrito.cantidad > 1) {
                     productoEnCarrito.cantidad--;
                 } else {
-                    carrito = carrito.filter(p => p.id !== this.id);
+                    carritoControl.Modelo.carrito = carritoControl.Modelo.carrito.filter(p => p.id !== this.id);
                 }
                 this.eliminarProducto();
                 control.refrescarProductos();
@@ -94,10 +96,12 @@ class Producto{
             cantidad: this.cantidad
         };
 
-        agregarAlCarrito(productoAgregado);
+        carritoControl.agregarAlCarrito(productoAgregado);
     }
 
     eliminarProducto(){
-        eliminarDelCarrito(this.id);
+        carritoControl.eliminarDelCarrito(this.id);
     }
 }
+
+export { Producto };
