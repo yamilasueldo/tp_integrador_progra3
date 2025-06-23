@@ -183,20 +183,9 @@
         box-shadow: 2px 0 10px rgba(0,0,0,0.3);
         height: 100vh;
         position: sticky;
-        display: none;
         top: 0;
         left: 0;
         z-index: 10;
-    }
-
-    .sidebar.open {
-        display: block;
-    }
-
-    @media (min-width: 760px) {
-        .sidebar {
-            display: block;
-        }
     }
 
     .sidebar h3 {
@@ -238,6 +227,37 @@
     .nav-item span {
         font-weight: 700;
         color: var(--color-1);
+    }
+
+    @media(max-width: 760px) {
+        .sidebar-wrapper {
+            flex-direction: column;
+        }
+        
+        .sidebar {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            max-width: none !important;
+            height: fit-content !important;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem !important;
+            gap: 0.5rem;
+        }
+
+        .sidebar h3 {
+            display: none;
+        }
+
+        .nav-item {
+            padding: 0.5rem 1rem !important;
+            margin-bottom: 0 !important;
+        }
+
+        .nav-item img {
+            display: none;
+        }
     }
 
     /* Contenido grid */
