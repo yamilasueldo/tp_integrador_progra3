@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../../Estaticos/css/styles_admin.css" />
+  <link rel="stylesheet" href="/css/styles_admin.css" />
   <title>Iniciar Sesión</title>
 </head>
 <body>
-  <!-- Botón de regreso -->
-  <a href="/Vista/welcome/index.html" class="back-button">
+  <a href="/" class="back-button">
     <span class="back-arrow">←</span>
     <span class="back-text">Volver</span>
   </a>
@@ -20,31 +19,30 @@
         <div class="slider-container">
           <div class="slider-wrapper">
             <div class="slide active">
-              <img src="../../../Estaticos/img/home/img_home1.png" alt="Imagen 1" />
+              <img src="/img/home/img_home1.png" alt="Imagen 1" />
               <div class="slide-content">
                 <h3>Bienvenido a nuestra plataforma</h3>
-                <p>Descubre todas las funcionalidades que tenemos para ti</p>
+                <p>Administra tu tienda online</p>
               </div>
             </div>
             <div class="slide">
-              <img src="../../../Estaticos/img/home/img_home2.png" alt="Imagen 2" />
+              <img src="/img/home/img_home2.png" alt="Imagen 2" />
               <div class="slide-content">
-                <h3>Gestiona tu contenido</h3>
-                <p>Administra todo desde un solo lugar de manera sencilla</p>
+                <h3>Gestiona tus productos</h3>
               </div>
             </div>
             <div class="slide">
-              <img src="../../../Estaticos/img/home/img_home3.png" alt="Imagen 3" />
+              <img src="/img/home/img_home3.png" alt="Imagen 3" />
               <div class="slide-content">
-                <h3>Conecta con tu audiencia</h3>
-                <p>Herramientas poderosas para hacer crecer tu comunidad</p>
+                <h3>Maneja tu stock</h3>
+                <p>Controla tu inventario de manera eficiente</p>
               </div>
             </div>
             <div class="slide">
-              <img src="../../../Estaticos/img/home/img_home4.png" alt="Imagen 4" />
+              <img src="/img/home/img_home4.png" alt="Imagen 4" />
               <div class="slide-content">
-                <h3>Analiza tus resultados</h3>
-                <p>Métricas detalladas para optimizar tu estrategia</p>
+                <h3>Aumenta tus ventas</h3>
+                <p>Optimiza tu tienda para maximizar tus ingresos</p>
               </div>
             </div>
           </div>
@@ -63,30 +61,37 @@
       <div class="form-section">
         <div class="card">
           <h3>Iniciar Sesión</h3>
-          <form>
+          
+          <!-- Contenedor para mensajes -->
+          <div id="messages"></div>
+          
+          <form action="/admin/auth/login" method="POST" id="loginForm">
             <div class="input-group">
-              <input type="email" id="email" placeholder=" " required />
+              <input type="email" id="email" name="email" placeholder=" " required />
               <label for="email">Correo electrónico</label>
             </div>
 
             <div class="input-group">
-              <input type="password" id="password" placeholder=" " required />
+              <input type="password" id="password" name="password" placeholder=" " required />
               <label for="password">Contraseña</label>
             </div>
 
-            <a href="../home/index.html" class="btn-submit">Ingresar</a>
+            <button type="submit" class="btn-submit" id="btnLogin">
+              <span id="loginText">Ingresar</span>
+              <span id="loginSpinner" style="display: none;">🔄 Verificando...</span>
+            </button>
 
             <div class="divider">
               <span>O ingresa como</span>
             </div>
 
-            <button type="button" class="btn-guest">
+            <button type="button" class="btn-guest" id="btnAccesoRapido">
               <span class="guest-icon">👤</span>
               Invitado
             </button>
 
             <div class="login-link">
-              <small>¿No tienes cuenta? <a href="../register/index.html">Registrate</a></small>
+              <small>¿No tienes cuenta? <a href="/admin/register">Regístrate</a></small>
             </div>
           </form>
         </div>
@@ -95,8 +100,9 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 DATA DREAM -  Yamila Sueldo - Tomas Blanco Rivas. Todos los derechos reservados.</p>
+    <p>&copy; 2025 DATA DREAM - Yamila Sueldo - Tomas Blanco Rivas. Todos los derechos reservados.</p>
   </footer>
-  <script src="../../../Estaticos/js/login.js" type="module"></script>
+  
+  <script src="/js/login.js" type="module"></script>
 </body>
 </html>

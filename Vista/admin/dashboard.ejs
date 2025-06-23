@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles_admin.css" />
+    <title><%= titulo || 'Dashboard - DATA DREAM' %></title>
+    <style>
+        /* Estilos específicos para el dashboard simplificado */
+        .admin-navbar {
+            background: #343a40;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-navbar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .admin-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: #c82333;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .add-product-btn {
+            background: #28a745;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s ease;
+        }
+        
+        .add-product-btn:hover {
+            background: #218838;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .products-table th,
+        .products-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .products-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .products-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .product-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .edit-btn {
+            background: #007bff;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background 0.3s ease;
+        }
+        
+        .edit-btn:hover {
+            background: #0056b3;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+        
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        @media (max-width: 768px) {
+            .header-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .products-table {
+                font-size: 0.9rem;
+            }
+            
+            .admin-navbar {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Admin -->
+    <nav class="admin-navbar">
+        <h1>DATA DREAM Admin</h1>
+        <div class="admin-actions">
+            <div class="admin-user">
+                👤 
+                <% if (typeof usuario !== 'undefined' && usuario) { %>
+                    <span><%= usuario.nombre %></span>
+                <% } else { %>
+                    <span>Admin</span>
+                <% } %>
+            </div>
+            <a href="/admin/logout" class="logout-btn">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="main-content">
+        <!-- Alertas -->
+        <% if (typeof mensaje !== 'undefined' && mensaje) { %>
+            <div class="alert alert-success">
+                ✅ <%= mensaje %>
+            </div>
+        <% } %>
+        
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error">
+                ❌ <%= error %>
+            </div>
+        <% } %>
+
+        <!-- Header con título y botón agregar -->
+        <div class="header-section">
+            <div>
+                <h2 style="margin: 0; color: #343a40;">Gestión de Productos</h2>
+                <p style="margin: 0.5rem 0 0 0; color: #6c757d;">Administra tu inventario</p>
+            </div>
+            <a href="/admin/productos/nuevo" class="add-product-btn">
+                ➕ Nuevo Producto
+            </a>
+        </div>
+
+        <!-- Tabla de Productos -->
+        <% if (typeof productos !== 'undefined' && productos.length > 0) { %>
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% productos.forEach(function(producto) { %>
+                        <tr>
+                            <td>
+                                <img src="<%= producto.imagen || '/img/default-product.png' %>" 
+                                     alt="<%= producto.nombre %>" 
+                                     class="product-img"
+                                     onerror="this.src='/img/default-product.png'">
+                            </td>
+                            <td>
+                                <div>
+                                    <strong><%= producto.nombre %></strong>
+                                    <% if (producto.descripcion) { %>
+                                        <br>
+                                        <small style="color: #6c757d;">
+                                            <%= producto.descripcion.length > 60 ? 
+                                                producto.descripcion.substring(0, 60) + '...' : 
+                                                producto.descripcion %>
+                                        </small>
+                                    <% } %>
+                                </div>
+                            </td>
+                            <td style="text-transform: capitalize;">
+                                <%= producto.categoria %>
+                            </td>
+                            <td>
+                                <strong>$<%= producto.precio.toLocaleString('es-AR') %></strong>
+                            </td>
+                            <td>
+                                <%= producto.stock %> unidades
+                            </td>
+                            <td>
+                                <span class="status-badge <%= producto.activo ? 'status-active' : 'status-inactive' %>">
+                                    <%= producto.activo ? 'Activo' : 'Inactivo' %>
+                                </span>
+                            </td>
+                            <td>
+                                <a href="/admin/productos/<%= producto.id %>/editar" 
+                                   class="edit-btn">
+                                    ✏️ Editar
+                                </a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <!-- Estado vacío -->
+            <div class="empty-state">
+                <h3>No hay productos disponibles</h3>
+                <p>Comienza agregando tu primer producto para gestionar tu inventario</p>
+                <br>
+                <a href="/admin/productos/nuevo" class="add-product-btn">
+                    ➕ Crear Primer Producto
+                </a>
+            </div>
+        <% } %>
+
+        <!-- Paginación (si es necesaria) -->
+        <% if (typeof paginacion !== 'undefined' && paginacion.totalPaginas > 1) { %>
+            <div style="display: flex; justify-content: center; gap: 0.5rem; margin: 2rem 0;">
+                <% if (paginacion.tieneAnterior) { %>
+                    <a href="/admin/dashboard?pagina=<%= paginacion.paginaActual - 1 %>" 
+                       style="padding: 0.5rem 1rem; background: #6c757d; color: white; text-decoration: none; border-radius: 6px;">
+                        ← Anterior
+                    </a>
+                <% } %>
+
+                <span style="padding: 0.5rem 1rem; background: #f8f9fa; border-radius: 6px;">
+                    Página <%= paginacion.paginaActual %> de <%= paginacion.totalPaginas %>
+                </span>
+
+                <% if (paginacion.tieneSiguiente) { %>
+                    <a href="/admin/dashboard?pagina=<%= paginacion.paginaActual + 1 %>" 
+                       style="padding: 0.5rem 1rem; background: #6c757d; color: white; text-decoration: none; border-radius: 6px;">
+                        Siguiente →
+                    </a>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+
+    <script>
+        // Auto-ocultar alertas después de 5 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+            const alertas = document.querySelectorAll('.alert');
+            alertas.forEach(function(alerta) {
+                setTimeout(function() {
+                    alerta.style.opacity = '0';
+                    setTimeout(function() {
+                        alerta.remove();
+                    }, 300);
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

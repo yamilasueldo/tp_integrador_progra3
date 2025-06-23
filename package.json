@@ -1,28 +1,50 @@
 {
-  "name": "tp_integrador_progra3",
+  "name": "data-dream-integrador",
   "version": "1.0.0",
-  "description": "App de autoservicio",
+  "description": "Sistema de autoservicio con panel de administración - DATA DREAM",
   "main": "main.js",
   "scripts": {
+    "start": "node main.js",
+    "dev": "nodemon main.js",
+    "seed": "node servicio/db.js",
+    "setup": "node setup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yamilasueldo/tp_integrador_progra3.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yamilasueldo/tp_integrador_progra3/issues"
-  },
-  "homepage": "https://github.com/yamilasueldo/tp_integrador_progra3#readme",
-  "keywords": [],
+  "keywords": [
+    "nodejs",
+    "express",
+    "sequelize",
+    "jwt",
+    "ecommerce",
+    "autoservicio",
+    "admin-panel",
+    "api-rest",
+    "mvc"
+  ],
+  "author": "Yamila Sueldo - Tomas Blanco Rivas",
+  "license": "MIT",
   "dependencies": {
-    "express": "^5.1.0",
-    "mysql2": "^3.14.1",
-    "sequelize": "^6.37.7"
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.5",
+    "sequelize": "^6.35.0",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "typescript": "^5.8.3"
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   }
 }

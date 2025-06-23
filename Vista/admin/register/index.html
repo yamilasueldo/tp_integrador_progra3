@@ -3,34 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../../Estaticos/css/styles_admin.css" />
+  <link rel="stylesheet" href="/css/styles_admin.css" />
   <title>Registro</title>
 </head>
 <body>
+  <!-- Botón de regreso -->
+  <a href="/admin/login" class="back-button">
+    <span class="back-arrow">←</span>
+    <span class="back-text">Volver</span>
+  </a>
+
   <main>
     <div class="container">
       <div class="card">
-        <h3>Crear Cuenta</h3>
-        <form>
-          <div class="input-group">
-            <input type="text" id="name" placeholder=" " required />
-            <label for="name">Usuario</label>
+        <h3>Crear Cuenta de Administrador</h3>
+        
+        <!-- Contenedor para mensajes -->
+        <div id="messages"></div>
+        
+        <form action="/admin/auth/registro" method="POST" id="registerForm">
+          
+          <!-- Nombre y Apellido -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="input-group">
+              <input type="text" id="nombre" name="nombre" placeholder=" " required maxlength="50" />
+              <label for="nombre">Nombre</label>
+            </div>
+
+            <div class="input-group">
+              <input type="text" id="apellido" name="apellido" placeholder=" " required maxlength="50" />
+              <label for="apellido">Apellido</label>
+            </div>
           </div>
 
           <div class="input-group">
-            <input type="email" id="email" placeholder="" required />
+            <input type="email" id="email" name="email" placeholder=" " required />
             <label for="email">Correo electrónico</label>
           </div>
 
           <div class="input-group">
-            <input type="password" id="password" placeholder="" required />
+            <input type="password" id="password" name="password" placeholder=" " required minlength="6" />
             <label for="password">Contraseña</label>
+            <small style="color: #6c757d; font-size: 0.8rem; margin-top: 0.5rem; display: block;">
+              Mínimo 6 caracteres, debe incluir mayúscula, minúscula y número
+            </small>
           </div>
 
-          <button type="submit" class="btn-submit">Registrarse</button>
+          <div class="input-group">
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder=" " required />
+            <label for="confirmPassword">Confirmar contraseña</label>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btnRegister">
+            <span id="registerText">Registrarse</span>
+            <span id="registerSpinner" style="display: none;">🔄 Creando cuenta...</span>
+          </button>
 
           <div class="login-link">
-            <small>¿Ya tienes cuenta?<a href="../login/index.html">Inicia sesión</a></small>
+            <small>¿Ya tienes cuenta? <a href="/admin/login">Inicia sesión</a></small>
           </div>
         </form>
       </div>
@@ -38,8 +68,9 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 DATA DREAM -  Yamila Sueldo - Tomas Blanco Rivas. Todos los derechos reservados.</p>
+    <p>&copy; 2025 DATA DREAM - Yamila Sueldo - Tomas Blanco Rivas. Todos los derechos reservados.</p>
   </footer>
+
+  <script src="/js/register.js"></script>
 </body>
 </html>
- 

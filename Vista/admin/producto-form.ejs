@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles_admin.css" />
+    <title><%= titulo || 'Formulario Producto - DATA DREAM' %></title>
+    <style>
+        .admin-navbar {
+            background: #343a40;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-navbar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .form-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .admin-navbar {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Admin -->
+    <nav class="admin-navbar">
+        <h1>DATA DREAM Admin</h1>
+        <a href="/admin/dashboard" class="back-btn">← Volver al Dashboard</a>
+    </nav>
+
+    <!-- Formulario -->
+    <div class="form-container">
+        <div class="form-card">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #343a40;">
+                <%= accion === 'crear' ? '➕ Nuevo Producto' : '✏️ Editar Producto' %>
+            </h2>
+
+            <!-- Mostrar errores si existen -->
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="alert alert-error">
+                    ❌ <%= error %>
+                </div>
+            <% } %>
+            
+            <% if (typeof errores !== 'undefined' && errores && errores.length > 0) { %>
+                <div class="alert alert-error">
+                    <strong>Errores de validación:</strong>
+                    <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
+                        <% errores.forEach(function(error) { %>
+                            <li><%= error.msg %></li>
+                        <% }); %>
+                    </ul>
+                </div>
+            <% } %>
+
+            <form method="POST" 
+                  action="<%= accion === 'crear' ? '/admin/productos' : '/admin/productos/' + producto.id %>"
+                  enctype="multipart/form-data">
+
+                <!-- Información básica -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Producto *</label>
+                        <input type="text" 
+                               id="nombre" 
+                               name="nombre" 
+                               required
+                               maxlength="100"
+                               value="<%= producto ? producto.nombre : '' %>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoría *</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Seleccionar categoría</option>
+                            <% categorias.forEach(function(cat) { %>
+                                <option value="<%= cat.valor %>" 
+                                        <%= producto && producto.categoria === cat.valor ? 'selected' : '' %>>
+                                    <%= cat.texto %>
+                                </option>
+                            <% }); %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" 
+                              name="descripcion" 
+                              maxlength="500"
+                              rows="3"><%= producto ? producto.descripcion || '' : '' %></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="precio">Precio ($) *</label>
+                        <input type="number" 
+                               id="precio" 
+                               name="precio" 
+                               required
+                               min="0"
+                               step="0.01"
+                               placeholder="0.00"
+                               value="<%= producto ? producto.precio : '' %>"
+                               onchange="console.log('Precio cambió a:', this.value, 'tipo:', typeof this.value)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock">Stock (unidades) *</label>
+                        <input type="number" 
+                               id="stock" 
+                               name="stock" 
+                               required
+                               min="0"
+                               step="1"
+                               placeholder="0"
+                               value="<%= producto ? producto.stock : '' %>"
+                               onchange="console.log('Stock cambió a:', this.value, 'tipo:', typeof this.value)">
+                    </div>
+                </div>
+
+                <!-- Detalles opcionales -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" 
+                               id="color" 
+                               name="color" 
+                               maxlength="50"
+                               value="<%= producto ? producto.color || '' : '' %>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="talla">Talla/Tamaño</label>
+                        <input type="text" 
+                               id="talla" 
+                               name="talla" 
+                               maxlength="20"
+                               value="<%= producto ? producto.talla || '' : '' %>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="material">Material</label>
+                    <input type="text" 
+                           id="material" 
+                           name="material" 
+                           maxlength="100"
+                           value="<%= producto ? producto.material || '' : '' %>">
+                </div>
+
+                <!-- Imagen -->
+                <div class="form-group">
+                    <label for="imagen">Imagen del Producto</label>
+                    <% if (producto && producto.imagen) { %>
+                        <div style="margin-bottom: 1rem; text-align: center;">
+                            <p style="color: #6c757d; margin-bottom: 0.5rem;">Imagen actual:</p>
+                            <img src="<%= producto.imagen %>" 
+                                 alt="<%= producto.nombre %>" 
+                                 style="max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 8px;"
+                                 onerror="this.src='/img/default-product.png'">
+                        </div>
+                    <% } %>
+                    <input type="file" 
+                           id="imagen" 
+                           name="imagen" 
+                           accept="image/*">
+                    <small style="color: #6c757d; font-size: 0.9rem;">
+                        Formatos: JPG, PNG, GIF, WEBP. Máximo 5MB.
+                    </small>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="form-actions">
+                    <a href="/admin/dashboard" class="btn-secondary">
+                        ❌ Cancelar
+                    </a>
+                    
+                    <button type="submit" class="btn-primary">
+                        <%= accion === 'crear' ? '✅ Crear Producto' : '💾 Guardar Cambios' %>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Validación mejorada del formulario con debugging detallado
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const nombre = document.getElementById('nombre').value.trim();
+            const categoria = document.getElementById('categoria').value;
+            const precio = document.getElementById('precio').value;
+            const stock = document.getElementById('stock').value;
+
+            console.log('🔍 DEBUG - Validando formulario...');
+            console.log('📊 Valores capturados:');
+            console.log(`  - nombre: "${nombre}" (tipo: ${typeof nombre})`);
+            console.log(`  - categoria: "${categoria}" (tipo: ${typeof categoria})`);
+            console.log(`  - precio: "${precio}" (tipo: ${typeof precio})`);
+            console.log(`  - stock: "${stock}" (tipo: ${typeof stock})`);
+
+            // Verificar que los valores no estén vacíos
+            console.log('🔍 Verificaciones:');
+            console.log(`  - precio vacío: ${precio === ''}`);
+            console.log(`  - precio null/undefined: ${precio == null}`);
+            console.log(`  - stock vacío: ${stock === ''}`);
+            console.log(`  - stock null/undefined: ${stock == null}`);
+
+            // Validar nombre
+            if (!nombre) {
+                console.log('❌ Error: nombre vacío');
+                alert('El nombre del producto es requerido');
+                e.preventDefault();
+                document.getElementById('nombre').focus();
+                return false;
+            }
+
+            // Validar categoría
+            if (!categoria) {
+                console.log('❌ Error: categoría vacía');
+                alert('Debe seleccionar una categoría');
+                e.preventDefault();
+                document.getElementById('categoria').focus();
+                return false;
+            }
+
+            // Validar precio con más detalle
+            if (precio === '' || precio == null) {
+                console.log('❌ Error: precio vacío');
+                alert('El precio es requerido');
+                e.preventDefault();
+                document.getElementById('precio').focus();
+                return false;
+            }
+
+            const precioNum = parseFloat(precio);
+            console.log(`🔢 Precio parseado: ${precioNum} (isNaN: ${isNaN(precioNum)})`);
+            
+            if (isNaN(precioNum) || precioNum < 0) {
+                console.log('❌ Error: precio inválido');
+                alert(`El precio debe ser un número válido mayor o igual a 0. Valor actual: "${precio}"`);
+                e.preventDefault();
+                document.getElementById('precio').focus();
+                return false;
+            }
+
+            // Validar stock con más detalle
+            if (stock === '' || stock == null) {
+                console.log('❌ Error: stock vacío');
+                alert('El stock es requerido');
+                e.preventDefault();
+                document.getElementById('stock').focus();
+                return false;
+            }
+
+            const stockNum = parseInt(stock);
+            console.log(`🔢 Stock parseado: ${stockNum} (isNaN: ${isNaN(stockNum)})`);
+            
+            if (isNaN(stockNum) || stockNum < 0) {
+                console.log('❌ Error: stock inválido');
+                alert(`El stock debe ser un número entero mayor o igual a 0. Valor actual: "${stock}"`);
+                e.preventDefault();
+                document.getElementById('stock').focus();
+                return false;
+            }
+
+            // Validar que no sean valores demasiado grandes
+            if (precioNum > 999999999) {
+                console.log('❌ Error: precio demasiado alto');
+                alert('El precio es demasiado alto');
+                e.preventDefault();
+                document.getElementById('precio').focus();
+                return false;
+            }
+
+            if (stockNum > 999999) {
+                console.log('❌ Error: stock demasiado alto');
+                alert('El stock es demasiado alto');
+                e.preventDefault();
+                document.getElementById('stock').focus();
+                return false;
+            }
+
+            console.log('✅ Formulario válido, enviando...');
+            console.log('📤 Datos finales que se enviarán:');
+            console.log(`  - precio final: ${precioNum}`);
+            console.log(`  - stock final: ${stockNum}`);
+            
+            return true;
+        });
+
+        // Validación en tiempo real para precio
+        document.getElementById('precio').addEventListener('input', function() {
+            const valor = parseFloat(this.value);
+            console.log(`💰 Precio input: "${this.value}" -> ${valor} (isNaN: ${isNaN(valor)})`);
+            
+            if (this.value === '' || isNaN(valor) || valor < 0) {
+                this.style.borderColor = '#dc3545';
+            } else {
+                this.style.borderColor = '#28a745';
+            }
+        });
+
+        // Validación en tiempo real para stock
+        document.getElementById('stock').addEventListener('input', function() {
+            const valor = parseInt(this.value);
+            console.log(`📦 Stock input: "${this.value}" -> ${valor} (isNaN: ${isNaN(valor)})`);
+            
+            if (this.value === '' || isNaN(valor) || valor < 0) {
+                this.style.borderColor = '#dc3545';
+            } else {
+                this.style.borderColor = '#28a745';
+            }
+        });
+
+        // Auto-focus en el primer campo al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('nombre').focus();
+            
+            // Debug inicial de valores
+            const precio = document.getElementById('precio').value;
+            const stock = document.getElementById('stock').value;
+            console.log('🔄 Valores iniciales del formulario:');
+            console.log(`  - precio inicial: "${precio}"`);
+            console.log(`  - stock inicial: "${stock}"`);
+        });
+    </script>
+</body>
+</html>
